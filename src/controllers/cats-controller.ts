@@ -1,40 +1,56 @@
-import { Request, Response } from "express";
-console.log('1')
-import { Cats } from '../db/entities/cats'
-console.log('2')
-import { catsRepository } from "../repositories/cats-repository";
-
-// export class CatsController {
+import { Request, Response } from 'express';
+import { Cats } from '../db/entities/cats';
+import { catsRepository } from '../repositories/cats-repository';
+import * as console from 'node:console';
 
 const createCat = async (req: Request, res: Response): Promise<void> => {
+  console.log(1111);
   try {
-    const { name, age } = req.body;
+    console.log(req.body);
     console.log('here');
 
     const cat = new Cats();
-    cat.name = 'BonBon2';
+    cat.name = 'BonBon';
 
-    catsRepository.save(cat);
-    res.status(201).json(cat)
-  } catch (err){
+    await catsRepository.save(cat);
+    res.status(201).json(cat);
+  } catch (err) {
     console.log('err', err);
-    res.status(500).json({message:'Internal server error'})
+    res.status(500).json({ message: 'Internal server error' });
   }
-}
+};
 
 const getAllCat = async (req: Request, res: Response): Promise<void> => {
   try {
-    const allCats = catsRepository.find();
-    console.log(allCats);
-    res.status(201).json(allCats);
-  } catch (err){
+    const allCats = await catsRepository.find();
+
+    res.status(200).json(allCats);
+  } catch (err) {
     console.log('err', err);
-    res.status(500).json({message: err.message})
+    res.status(500).json({ message: err.message });
   }
-}
-// }
+};
+
+const getCat = async (req: Request<{ id: string }>, res: Response): Promise<void> => {
+  try {
+    const catId = parseInt(req.params.id);
+
+    const cat = await catsRepository.findOneBy({ id: catId });
+
+    if (!cat) {
+      res.status(404).json({ error: 'User not found' });
+      return
+    }
+
+    res.status(200).json(cat);
+  } catch (err) {
+    console.log('err', err);
+    res.status(500).json({ message: err.message });
+  }
+};
 
 export default {
   createCat,
-  getAllCat
-}
+  getAllCat,
+  getCat
+};

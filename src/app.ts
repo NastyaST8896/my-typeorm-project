@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { AppDataSource } from "./config/database";
-import catsRoutes from './routes/cats-routes';
+import {catsRouter} from './routes/cats-routes';
 import express from "express";
 import dotenv from "dotenv";
 
@@ -10,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use("/cats", catsRoutes);
+app.use('/cats', catsRouter);
 
 AppDataSource.initialize()
 .then(() => {
@@ -22,22 +22,3 @@ AppDataSource.initialize()
   });
 })
 .catch((error) => console.log(error));
-
-// app.use((req, res, next) => {
-//   console.log('AAAA');
-//   return next();
-// })
-
-// app.get('/some', (r, rs) => {
-//   rs.json({ ok: 'da' })
-// })
-
-// app.listen(3001, (err) => {
-//   if (err) {
-//     console.error('err:', err)
-//     return
-//   }
-//   console.log('here')
-// })
-
-
