@@ -34,7 +34,6 @@ const getAllCat = async (req: Request, res: Response): Promise<void> => {
 const getCat = async (req: Request<{ id: string }>, res: Response): Promise<void> => {
   try {
     const catId = parseInt(req.params.id);
-
     const cat = await catsRepository.findOneBy({ id: catId });
 
     if (!cat) {
