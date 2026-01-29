@@ -7,8 +7,8 @@ import {
 @Entity()
 export class Cats {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column({ nullable: true,  })
-  name!: string;
+  name: string;
 }

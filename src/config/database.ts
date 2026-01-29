@@ -1,8 +1,8 @@
+import "reflect-metadata"
 import { DataSource } from "typeorm";
-import { Cats } from "../db/entities/cats";
-import path from 'path';
+// import * as path from 'path';
 
-console.log(`>`, path.resolve(__dirname, "../db/entities"))
+// console.log(`>`, path.resolve(__dirname, "../db/migrations"))
 
 
 export const AppDataSource = new DataSource({
@@ -14,7 +14,8 @@ export const AppDataSource = new DataSource({
     database: "test",
     synchronize: true,
     logging: false,
-    entities: [path.resolve(__dirname, '../db/entities/**/*.{ts}')],
-    migrations: [path.resolve(__dirname, '../db/migrations**/*.{ts}')],
+    // entities: [Cats],
+    entities: ['src/db/entities/**/*.ts'],
+    migrations: ['src/db/migrations/**/*.ts'],
     subscribers: [],
 });

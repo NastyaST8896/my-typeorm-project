@@ -14,7 +14,10 @@ app.use("/cats", catsRoutes);
 
 AppDataSource.initialize()
 .then(() => {
-  app.listen(PORT, () => {
+  app.listen(PORT, (err) => {
+    if (err) {
+      console.log('>err', err);
+    }
     console.log(`Server running on port ${PORT}`);
   });
 })

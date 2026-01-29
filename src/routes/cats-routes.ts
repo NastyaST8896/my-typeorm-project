@@ -1,9 +1,11 @@
 import { Router } from "express";
-import { CatsController } from "../controllers/cats-controller";
+import catsController from "../controllers/cats-controller";
 
 const router = Router();
-const catsController = new CatsController();
 
-router.post("/cats", catsController.newCats);
+
+router.post("/", catsController.createCat);
+router.get("/allcats", catsController.getAllCat);
+
 
 export default router;
