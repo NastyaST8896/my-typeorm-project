@@ -3,14 +3,18 @@ import { Cats } from '../db/entities/cats';
 import { catsRepository } from '../repositories/cats-repository';
 import * as console from 'node:console';
 
-const createCat = async (req: Request, res: Response): Promise<void> => {
-  console.log(1111);
-  try {
-    console.log(req.body);
-    console.log('here');
+type CatType = {
+  id?: number,
+  name: string,
+  color?: "black" | "white" | "orange"
+}
 
+const createCat = async (req: Request<{}, {}, CatType>, res: Response): Promise<void> => {
+  try {
+    const {name, color} = req.body
     const cat = new Cats();
-    cat.name = 'BonBon';
+    cat.name = name;
+    cat.color = color;
 
     await catsRepository.save(cat);
     res.status(201).json(cat);
