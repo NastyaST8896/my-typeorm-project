@@ -12,7 +12,7 @@ export const AppDataSource = new DataSource({
     username: 'postgres',
     password: 'fusion',
     database: "test",
-    synchronize: true,
+    synchronize: false,
     logging: false,
     // entities: [Cats],
     entities: ['src/db/entities/**/*.ts'],

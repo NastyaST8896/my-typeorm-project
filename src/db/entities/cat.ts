@@ -1,11 +1,15 @@
 import { 
   Entity, 
   PrimaryGeneratedColumn, 
-  Column, 
+  Column,
+  ManyToOne,
+  JoinColumn, 
  } from "typeorm";
 
+ import {User} from './user'
+
 @Entity()
-export class Cats {
+export class Cat {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -18,4 +22,12 @@ export class Cats {
     default: "black"
   })
   color: string;
+
+  @ManyToOne(() => User, (user) => user.cats)
+
+  @JoinColumn({ name: 'ownerId' })
+  owner: User;
+
+  @Column()
+  ownerId: string;
 }

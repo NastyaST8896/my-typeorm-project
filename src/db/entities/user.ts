@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import {Cat} from './cat';
 
 @Entity()
 export class User {
@@ -6,7 +7,7 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column()
+    @Column({nullable: true})
     firstName: string
 
     @Column()
@@ -15,4 +16,6 @@ export class User {
     @Column()
     age: number
 
+    @OneToMany(() => Cat, (cat) => cat.owner)
+    cats: Cat[];
 }

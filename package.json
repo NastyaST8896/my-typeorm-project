@@ -6,15 +6,8 @@
     "author": "",
     "type": "commonjs",
     "main": "index.js",
-    "nodemonConfig": {
-        "watch": [
-            "src"
-        ],
-        "ext": "js,ts",
-        "exec": "ts-node ./src/app.ts"
-    },
     "scripts": {
-        "start": "nodemon",
+        "start": "ts-node ./src/app.ts",
         "test": "echo \"Error: no test specified\" && exit 1",
         "migration:create": "ts-node node_modules/typeorm/cli.js migration:generate --dataSource src/config/database.ts",
         "migration:run": "ts-node node_modules/typeorm/cli.js migration:run --dataSource src/config/database.ts"

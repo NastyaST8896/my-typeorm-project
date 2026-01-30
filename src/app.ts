@@ -3,6 +3,7 @@ import { AppDataSource } from "./config/database";
 import {catsRouter} from './routes/cats-routes';
 import express, {Application} from "express";
 import dotenv from "dotenv";
+import {userRouter} from './routes/user-rotes'
 
 dotenv.config();
 
@@ -11,7 +12,8 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use('/cats', catsRouter);
+app.use('/user', userRouter);
+app.use('/cat', catsRouter);
 
 AppDataSource.initialize()
 .then(() => {
