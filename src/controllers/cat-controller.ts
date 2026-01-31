@@ -48,7 +48,7 @@ const getAllCat = async (req: Request, res: Response): Promise<void> => {
     const allCats = await catRepository
     .createQueryBuilder("cat")
     .leftJoinAndSelect("cat.owner", "owner")
-    // .select(["owner.firstName","owner.lastName"])
+    .select([ "cat", "owner.firstName", "owner.lastName"])
     .getMany();
 
 
